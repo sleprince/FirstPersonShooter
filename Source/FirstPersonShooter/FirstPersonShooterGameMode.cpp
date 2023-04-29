@@ -48,6 +48,9 @@ void AFirstPersonShooterGameMode::Tick(float DeltaTime)
 			//this is like instantiate in Unity
 			AEnemyController* enemy = world->SpawnActor<AEnemyController>(EnemyBlueprint, 
 				enemyLocation, FRotator::ZeroRotator);
+
+			//minus to get the difference
+			enemy->Direction = (playerLocation - enemyLocation).GetSafeNormal(); //to make an arrow towards player, size 1, like normalized
 		}
 	}
 
