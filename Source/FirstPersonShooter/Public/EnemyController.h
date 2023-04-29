@@ -17,6 +17,16 @@ public:
 	// Sets default values for this actor's properties
 	AEnemyController();
 
+	UPROPERTY(EditAnywhere)
+		UShapeComponent* RootBox;
+
+	UPROPERTY(EditAnywhere)
+		float Speed = 100.0f;
+
+	UFUNCTION()
+		void OnOverlap(UPrimitiveComponent* OverlappedComponent,
+			AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
