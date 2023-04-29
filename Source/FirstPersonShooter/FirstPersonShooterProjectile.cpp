@@ -46,4 +46,3 @@ void AFirstPersonShooterProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* 
 		Destroy(); //if the bullet hits an object that has physics, destroy the bullet
 	}
 }
-}
