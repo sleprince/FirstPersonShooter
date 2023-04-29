@@ -45,6 +45,7 @@ void AEnemyController::Tick(float DeltaTime) //like Update()
 	SetActorLocation(enemyLocation); //moving the enemy in the above direction, to enemyLocation, to chase player
 }
 
+//like OnCollisionEnter
 void AEnemyController::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	ACharacter* collidedWith = (ACharacter*)OtherActor;
@@ -52,6 +53,11 @@ void AEnemyController::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 	if (collidedWith == UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))
 	{
 		UGameplayStatics::SetGamePaused(GetWorld(), true);
+	}
+	else if (OtherActor->GetName().Contains("Projectile")) //only runs if the above is false and this is true
+	{
+		OtherActor->Destroy();
+		this->Destroy();
 	}
 }
 
