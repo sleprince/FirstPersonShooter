@@ -4,6 +4,11 @@
 #include "FirstPersonShooterCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 
+#include "Kismet/GameplayStatics.h"
+#include "EnemyController.h" //needed to spawn the blueprint which inherits from EnemyController
+
+//cpp is where you define all the methods
+
 AFirstPersonShooterGameMode::AFirstPersonShooterGameMode()
 	: Super()
 {
@@ -11,4 +16,48 @@ AFirstPersonShooterGameMode::AFirstPersonShooterGameMode()
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(TEXT("/Game/FirstPerson/Blueprints/BP_FirstPersonCharacter"));
 	DefaultPawnClass = PlayerPawnClassFinder.Class;
 
+	PrimaryActorTick.bCanEverTick = true; //tick functionality will not work without this line
+
 }
+
+void AFirstPersonShooterGameMode::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime); //the super line has to be the first line
+
+	EnemyTimer -= DeltaTime; //delta time so game runs at same speed regardless of cpu spec/fps
+
+	if (EnemyTimer < 0.0f)
+	{
+		EnemyTimer = SpawnRate;
+
+		UWorld* world = GetWorld(); //UWorld is like the scene or level
+
+		if (world) //if variable world is true, so if it's not null
+		{
+			int playerIndex = 0;
+			FVector playerLocation = UGameplayStatics::GetPlayerCharacter(world, playerIndex)
+				->GetActorLocation(); //FVector is like Vector3
+
+			FVector enemyLocation = playerLocation; //starts off at exact player location
+
+			float randomDistance = FMath::RandRange(10.0f, 1000.0f);
+
+			enemyLocation.X += randomDistance;
+			enemyLocation.Y += randomDistance; //Z is up and down in Unreal
+
+			//this is like instantiate in Unity
+			AEnemyController* enemy = world->SpawnActor<AEnemyController>(EnemyBlueprint, 
+				enemyLocation, FRotator::ZeroRotator);
+		}
+	}
+
+}
+
+void AFirstPersonShooterGameMode::BeginPlay()
+{
+	Super::BeginPlay(); //super calling from it's parent class which in this case is AGameModeBase
+}
+
+
+
+
