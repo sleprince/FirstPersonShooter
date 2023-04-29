@@ -10,6 +10,8 @@ UCLASS() //all created classes have A at the start
 class FIRSTPERSONSHOOTER_API AEnemyController : public AActor
 {
 	GENERATED_BODY()
+
+		//the final 2 methods are similar to Start() and Update() in C#
 	
 public:	
 	// Sets default values for this actor's properties

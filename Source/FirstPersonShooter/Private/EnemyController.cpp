@@ -7,14 +7,14 @@
 AEnemyController::AEnemyController()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = true; //so can turn this off if no update functionality
 
 }
 
 // Called when the game starts or when spawned
 void AEnemyController::BeginPlay()
 {
-	Super::BeginPlay();
+	Super::BeginPlay(); //super = parent, so in this case the Actor
 	
 }
 
