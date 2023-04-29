@@ -25,6 +25,9 @@ void AEnemyController::BeginPlay()
 {
 	Super::BeginPlay(); //super = parent, so in this case the Actor
 	
+	int lifespanInSeconds = 10;
+
+	this->SetLifeSpan(lifespanInSeconds);
 }
 
 // Called every frame
