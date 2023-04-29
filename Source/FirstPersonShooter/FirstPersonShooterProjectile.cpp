@@ -38,6 +38,12 @@ void AFirstPersonShooterProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* 
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
 
-		Destroy();
+		FVector scale = OtherComp->GetComponentScale(); // -> is the same as . in c#
+		scale *= 0.9f; //scale = scale * 0.9 (90%), so 10% smaller
+
+		OtherComp->SetWorldScale3D(scale); //OtherComp is the mesh of the object that's been hit
+
+		Destroy(); //if the bullet hits an object that has physics, destroy the bullet
 	}
+}
 }
