@@ -60,12 +60,12 @@ void AEnemyController::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 
 	if (collidedWith == UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))
 	{
-		UGameplayStatics::SetGamePaused(GetWorld(), true);
+		//UGameplayStatics::SetGamePaused(GetWorld(), true);
 	}
 	else if (OtherActor->GetName().Contains("Projectile")) //only runs if the above is false and this is true
 	{
-		OtherActor->Destroy();
-		this->Destroy();
+		//OtherActor->Destroy();
+		//this->Destroy();
 	}
 }
 
