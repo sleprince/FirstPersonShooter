@@ -17,6 +17,10 @@ public:
 	// Sets default values for this actor's properties
 	AEnemyController();
 
+	UPROPERTY(EditAnywhere, Category = "Character_BP") 
+	TSubclassOf<class AFirstPersonShooterCharacter>
+	CharacterBlueprint;
+
 	UPROPERTY(EditAnywhere)
 		UShapeComponent* RootBox;
 

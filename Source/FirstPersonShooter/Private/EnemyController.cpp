@@ -5,6 +5,8 @@
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 
+#include "FirstPersonShooterCharacter.h"
+
 // Sets default values
 AEnemyController::AEnemyController()
 {
@@ -60,7 +62,14 @@ void AEnemyController::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 
 	if (collidedWith == UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))
 	{
+		// Access the Health variable in the other actor's blueprint
+		//if (ACharacter* Other = Cast<CharacterBlueprint>(OtherActor))
+		//{
+		//	Other->Health -= 0; // assuming that Health is a float variable in AMyOtherActor
+		//}
 		//UGameplayStatics::SetGamePaused(GetWorld(), true);
+
+		//CharacterBlueprint-
 	}
 	else if (OtherActor->GetName().Contains("Projectile")) //only runs if the above is false and this is true
 	{
