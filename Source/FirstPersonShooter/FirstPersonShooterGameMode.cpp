@@ -20,7 +20,7 @@ AFirstPersonShooterGameMode::AFirstPersonShooterGameMode()
 
 }
 
-void AFirstPersonShooterGameMode::Tick(float DeltaTime)
+void AFirstPersonShooterGameMode::Tick(float DeltaTime) //this is all to do with spawning enemies
 {
 	Super::Tick(DeltaTime); //the super line has to be the first line
 
@@ -42,8 +42,9 @@ void AFirstPersonShooterGameMode::Tick(float DeltaTime)
 
 			float randomDistance = FMath::RandRange(10.0f, 1000.0f);
 
+			//X left right, Y forward back, Z up down in Unreal
 			enemyLocation.X += randomDistance;
-			enemyLocation.Y += randomDistance; //Z is up and down in Unreal
+			enemyLocation.Y += randomDistance;
 
 			//this is like instantiate in Unity
 			AEnemyController* enemy = world->SpawnActor<AEnemyController>(EnemyBlueprint, 

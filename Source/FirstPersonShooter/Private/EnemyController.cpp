@@ -35,14 +35,22 @@ void AEnemyController::Tick(float DeltaTime) //like Update()
 {
 	Super::Tick(DeltaTime);
 
-	FVector enemyLocation = GetActorLocation();
+	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(this, 0);
+	if (PlayerPawn)
+	{
+		FVector PlayerLocation = PlayerPawn->GetActorLocation();
+		FVector EnemyLocation = GetActorLocation();
+		FVector Dir = (PlayerLocation - EnemyLocation).GetSafeNormal();
 
-	//X left right, Y forward back, Z up down
-	enemyLocation.X += Direction.X * Speed * DeltaTime;
-	enemyLocation.Y += Direction.Y * Speed * DeltaTime; //without speed * time, they will move very slowly
-	//time is so that it looks the same on any machine, do this whenever working with movement
+		//without speed * time, they will move very slowly
+		//time is so that it looks the same on any machine, do this whenever working with movement
+		//moving the enemy in the above direction, to enemyLocation, to chase player
+		SetActorLocation(EnemyLocation + Dir * Speed * DeltaTime);
+	}
+	
 
-	SetActorLocation(enemyLocation); //moving the enemy in the above direction, to enemyLocation, to chase player
+
+	//SetActorLocation(enemyLocation); 
 }
 
 //like OnCollisionEnter
