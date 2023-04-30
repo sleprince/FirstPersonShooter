@@ -38,7 +38,8 @@ void AFirstPersonShooterProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* 
 {
 	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) 
-		&& OtherComp->IsSimulatingPhysics() || OtherActor->IsA(AEnemyController::StaticClass()))
+		&& OtherComp->IsSimulatingPhysics() || (OtherActor != nullptr) && 
+		OtherActor->IsA(AEnemyController::StaticClass()))
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
 

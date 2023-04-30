@@ -51,7 +51,8 @@ void AFirstPersonShooterGameMode::Tick(float DeltaTime) //this is all to do with
 				enemyLocation, FRotator::ZeroRotator);
 
 			//minus to get the difference
-			enemy->Direction = (playerLocation - enemyLocation).GetSafeNormal(); //to make an arrow towards player, size 1, like normalized
+			if (enemy != nullptr)
+				enemy->Direction = (playerLocation - enemyLocation).GetSafeNormal(); //to make an arrow towards player, size 1, like normalized
 		}
 	}
 
