@@ -4,6 +4,9 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
 
+//#include "Kismet/GameplayStatics.h"
+#include "EnemyController.h"
+
 AFirstPersonShooterProjectile::AFirstPersonShooterProjectile() 
 {
 	// Use a sphere as a simple collision representation
@@ -34,7 +37,8 @@ AFirstPersonShooterProjectile::AFirstPersonShooterProjectile()
 void AFirstPersonShooterProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	// Only add impulse and destroy projectile if we hit a physics
-	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
+	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) 
+		&& OtherComp->IsSimulatingPhysics() || OtherActor->IsA(AEnemyController::StaticClass()))
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
 
