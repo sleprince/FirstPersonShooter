@@ -5,7 +5,7 @@
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 
-//#include ""
+#include "Components/StaticMeshComponent.h"
 
 // Sets default values
 AEnemyController::AEnemyController()
@@ -19,6 +19,9 @@ AEnemyController::AEnemyController()
 	RootBox->SetGenerateOverlapEvents(true);
 
 	RootBox->OnComponentBeginOverlap.AddDynamic(this, &AEnemyController::OnOverlap);
+
+	//get the ghost mesh
+	//RootBox->GetDefaultSubobjectByName("StaticMesh");
 
 }
 

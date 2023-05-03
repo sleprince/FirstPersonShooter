@@ -33,6 +33,7 @@ public:
 			const FHitResult& SweepResult);
 
 	FVector Direction;
+	
 
 protected:
 	// Called when the game starts or when spawned
