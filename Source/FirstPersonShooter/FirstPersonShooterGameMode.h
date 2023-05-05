@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+
+#include "Blueprint/UserWidget.h" //needed to do TSubclassOf<UUserWidget>
+
 #include "FirstPersonShooterGameMode.generated.h"
 
 //header is where you declare all variables and functions
@@ -26,12 +29,27 @@ public:
 	float EnemyTimer; //pause between each new enemy spawning
 	float SpawnRate = 5.0f;
 
-public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override; //virtual because not implemented in this file
 	//override because we are going to override it in cpp file
 
 	virtual void BeginPlay() override; //like onStart()
+
+	void IncreaseScore();
+
+	//UMG is Unreal Motion Graphics UI Designer
+	UFUNCTION(BlueprintCallable, Category = "UMG Game") //so we can use this in Unreal
+		void ChangeMenuWidget(TSubclassOf<UUserWidget> NewWidgetClass);
+
+protected: //accessible inside this class and inside any children
+
+	int Score;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UMG Game") //so we can use this in Editor
+		TSubclassOf<UUserWidget> StartingWidgetClass;
+
+	UPROPERTY()
+		UUserWidget* CurrentWidget;
 
 };
 

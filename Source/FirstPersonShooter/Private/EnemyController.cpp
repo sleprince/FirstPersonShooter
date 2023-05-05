@@ -5,7 +5,8 @@
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 
-#include "Components/StaticMeshComponent.h"
+//#include "MyGameModeBase.h"
+#include "FirstPersonShooter/FirstPersonShooterGameMode.h" //finally figured it out, had to put FirstPersonShooter/ in front
 
 // Sets default values
 AEnemyController::AEnemyController()
@@ -21,6 +22,8 @@ AEnemyController::AEnemyController()
 	RootBox->OnComponentBeginOverlap.AddDynamic(this, &AEnemyController::OnOverlap);
 
 }
+
+//Any class that inherits from Actor has A prefix.
 
 // Called when the game starts or when spawned
 void AEnemyController::BeginPlay()
@@ -75,6 +78,10 @@ void AEnemyController::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 	{
 		//OtherActor->Destroy();
 		//this->Destroy();
+
+		//cast as an fpsGameMode, * is cast as
+		((AFirstPersonShooterGameMode*)GetWorld()->GetAuthGameMode())
+		->IncreaseScore();  //grabbing the custom gamemode set in the game
 	}
 }
 

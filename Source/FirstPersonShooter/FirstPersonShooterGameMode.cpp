@@ -7,6 +7,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "EnemyController.h" //needed to spawn the blueprint which inherits from EnemyController
 
+#include "GameWidget.h" //needed to cast the StartingWidget to our custom widget class
+
 //cpp is where you define all the methods
 
 AFirstPersonShooterGameMode::AFirstPersonShooterGameMode()
@@ -61,8 +63,42 @@ void AFirstPersonShooterGameMode::Tick(float DeltaTime) //this is all to do with
 void AFirstPersonShooterGameMode::BeginPlay()
 {
 	Super::BeginPlay(); //super calling from it's parent class which in this case is AGameModeBase
+
+	ChangeMenuWidget(StartingWidgetClass);
+
+	//cast it as UGameWidget, our custom child of UserWidget
+	((UGameWidget*)CurrentWidget)->Load();
 }
 
+void AFirstPersonShooterGameMode::IncreaseScore()
+{
+	Score += 1; //score equals score plus 1 shorthand
+
+	((UGameWidget*)CurrentWidget)->SetScore(Score);
+}
+
+void AFirstPersonShooterGameMode::ChangeMenuWidget(TSubclassOf<UUserWidget>NewWidgetClass)
+{
+	//we call ChangeMenuWidget whenever we want to remove the ScoreText and replace it
+	if (CurrentWidget != nullptr) //if the widget in the game (with the score text) now is not null
+	{
+		CurrentWidget->RemoveFromViewport();
+		CurrentWidget = nullptr; //remove it from view then make it null
+
+	}
+
+	if (NewWidgetClass != nullptr) //if it's not null we need to create a new widget and add it to the viewport
+	{
+		CurrentWidget = CreateWidget<UUserWidget>(GetWorld(), NewWidgetClass);
+
+		if (CurrentWidget != nullptr) //only if this switchover was successful
+		{
+			CurrentWidget->AddToViewport();
+		}
+
+	}
+
+}
 
 
 
