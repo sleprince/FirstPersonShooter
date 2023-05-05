@@ -32,5 +32,8 @@ public:
 
 	UPROPERTY() //the asterisk after means it's a pointer
 		UTextBlock* ScoreText;
+
+	UFUNCTION(BlueprintCallable, Category = "GameOver")
+	void OnGameOver(int score);
 	
 };

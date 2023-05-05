@@ -27,7 +27,7 @@ public:
 			EnemyBlueprint;
 
 	float EnemyTimer; //pause between each new enemy spawning
-	float SpawnRate = 5.0f;
+	float SpawnRate = 2.0f;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override; //virtual because not implemented in this file
@@ -43,6 +43,7 @@ public:
 
 protected: //accessible inside this class and inside any children
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Score")
 	int Score;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UMG Game") //so we can use this in Editor

@@ -2,6 +2,7 @@
 
 
 #include "GameWidget.h"
+#include "Kismet/GameplayStatics.h"
 
 //starts with U instead of A because it is a user interface
 void UGameWidget::Load()
@@ -31,5 +32,17 @@ void UGameWidget::SetScore(int score)
 		ScoreText->SetText(FText::FromString(FString(TEXT("Score: "))
 		+ FString::FromInt(score))); //like .ToString()
 
+	}
+}
+
+void UGameWidget::OnGameOver(int score)
+{
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
+
+	if (ScoreText != nullptr) //null checks always a good idea to stop game crashing
+	{
+		//instead of changing the score, here just adding to what's shown in the interface
+		ScoreText->SetText(FText::FromString(FString(TEXT("Game Over \nScore: ")) + FString::FromInt(score) 
+			+ TEXT("\nPress R to Restart.")));
 	}
 }

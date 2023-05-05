@@ -42,7 +42,7 @@ void AFirstPersonShooterGameMode::Tick(float DeltaTime) //this is all to do with
 
 			FVector enemyLocation = playerLocation; //starts off at exact player location
 
-			float randomDistance = FMath::RandRange(10.0f, 1000.0f);
+			float randomDistance = FMath::RandRange(100.0f, 1000.0f);
 
 			//X left right, Y forward back, Z up down in Unreal
 			enemyLocation.X += randomDistance;
