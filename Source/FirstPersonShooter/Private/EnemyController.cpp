@@ -20,9 +20,6 @@ AEnemyController::AEnemyController()
 
 	RootBox->OnComponentBeginOverlap.AddDynamic(this, &AEnemyController::OnOverlap);
 
-	//get the ghost mesh
-	//RootBox->GetDefaultSubobjectByName("StaticMesh");
-
 }
 
 // Called when the game starts or when spawned
@@ -55,7 +52,7 @@ void AEnemyController::Tick(float DeltaTime) //like Update()
 	
 
 
-	//SetActorLocation(enemyLocation); 
+	//SetActorLocation(enemyLocation); //this version did not update, they kept going to player's old position
 }
 
 //like OnCollisionEnter
