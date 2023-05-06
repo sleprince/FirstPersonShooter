@@ -82,8 +82,8 @@ void AEnemyController::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 		//this->Destroy();
 
 		//cast as an fpsGameMode, * is cast as
-		((AFirstPersonShooterGameMode*)GetWorld()->GetAuthGameMode())
-		->IncreaseScore();  //grabbing the custom gamemode set in the game
+		//((AFirstPersonShooterGameMode*)GetWorld()->GetAuthGameMode())
+		//->IncreaseScore();  //grabbing the custom gamemode set in the game
 	}
 }
 
