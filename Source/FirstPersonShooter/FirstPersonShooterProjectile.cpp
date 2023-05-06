@@ -5,6 +5,7 @@
 #include "Components/SphereComponent.h"
 
 //#include "Kismet/GameplayStatics.h"
+#include "FirstPersonShooter/FirstPersonShooterGameMode.h" //finally figured it out, had to put FirstPersonShooter/ in front
 #include "EnemyController.h"
 
 AFirstPersonShooterProjectile::AFirstPersonShooterProjectile() 
@@ -52,6 +53,10 @@ void AFirstPersonShooterProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* 
 		if (scale.GetMin() < minCubeSize)
 		{
 			OtherActor->Destroy(); //if the scale is below the minimum, destory the object that got hit
+
+			//cast as an fpsGameMode, * is cast as
+			((AFirstPersonShooterGameMode*)GetWorld()->GetAuthGameMode())
+				->IncreaseScore();  //grabbing the custom gamemode set in the game
 
 		}
 		else
