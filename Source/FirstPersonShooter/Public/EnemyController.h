@@ -33,6 +33,8 @@ public:
 			const FHitResult& SweepResult);
 
 	FVector Direction;
+
+	float playerHealth = 100.0f;
 	
 
 protected:

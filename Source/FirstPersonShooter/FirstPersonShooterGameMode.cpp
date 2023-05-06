@@ -100,5 +100,10 @@ void AFirstPersonShooterGameMode::ChangeMenuWidget(TSubclassOf<UUserWidget>NewWi
 
 }
 
+void AFirstPersonShooterGameMode::OnGameOver()
+{
+	((UGameWidget*)CurrentWidget)->OnGameOver(Score);
+}
+
 
 

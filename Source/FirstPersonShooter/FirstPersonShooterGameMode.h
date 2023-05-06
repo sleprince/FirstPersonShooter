@@ -37,6 +37,8 @@ public:
 
 	void IncreaseScore();
 
+	void OnGameOver();
+
 	//UMG is Unreal Motion Graphics UI Designer
 	UFUNCTION(BlueprintCallable, Category = "UMG Game") //so we can use this in Unreal
 		void ChangeMenuWidget(TSubclassOf<UUserWidget> NewWidgetClass);
