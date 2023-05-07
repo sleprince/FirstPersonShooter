@@ -68,6 +68,10 @@ void AFirstPersonShooterGameMode::BeginPlay()
 
 	//cast it as UGameWidget, our custom child of UserWidget
 	((UGameWidget*)CurrentWidget)->Load();
+
+	//inputcomponent is input of player 1, bind the restart action we just made to trigger the OnRestart function
+	GetWorld()->GetFirstPlayerController()->InputComponent->BindAction("Restart", IE_Pressed, this, 
+		&AFirstPersonShooterGameMode::OnRestart).bExecuteWhenPaused = true; //make it still work when paused
 }
 
 void AFirstPersonShooterGameMode::IncreaseScore()
@@ -106,4 +110,9 @@ void AFirstPersonShooterGameMode::OnGameOver()
 }
 
 
-
+void AFirstPersonShooterGameMode::OnRestart()
+{
+	//this gamemode, this level we're playing now, bool for if options are reset, * before means the variable, that is at the memory
+	//pointer GetWorld _> use function GetName, will return a string that is cast as FName
+	UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()),false);
+}

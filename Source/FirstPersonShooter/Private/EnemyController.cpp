@@ -66,29 +66,23 @@ void AEnemyController::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 
 	if (collidedWith == UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))
 	{
-		// Access the Health variable in the other actor's blueprint
-		//if (ACharacter* Other = Cast<CharacterBlueprint>(OtherActor))
-		
-		//OtherActor->GetGameInstance()
-		
-		//UGameplayStatics::SetGamePaused(GetWorld(), true);
 
-		//CharacterBlueprint-
+		playerHealth -= damage;
 
-		playerHealth -= 10.0f;
-
-		if (playerHealth < 10.0f)
+		if (playerHealth < minHealth)
 		{
 			//cast as an fpsGameMode, * is cast as
 			((AFirstPersonShooterGameMode*)GetWorld()->GetAuthGameMode())
-				->OnGameOver();  //grabbing the custom gamemode set in the game
+				->OnGameOver();  //grabbing the custom gamemode set in the game //run game over function
 
-			UGameplayStatics::SetGamePaused(GetWorld(), true);
+			UGameplayStatics::SetGamePaused(GetWorld(), true); //pause game
 		}
 		
 	}
 	else if (OtherActor->GetName().Contains("Projectile")) //only runs if the above is false and this is true
 	{
+		//depricated
+		
 		//OtherActor->Destroy();
 		//this->Destroy();
 
