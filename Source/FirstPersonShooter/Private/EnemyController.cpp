@@ -71,11 +71,7 @@ void AEnemyController::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 
 		if (playerHealth < minHealth)
 		{
-			//cast as an fpsGameMode, * is cast as
-			((AFirstPersonShooterGameMode*)GetWorld()->GetAuthGameMode())
-				->OnGameOver();  //grabbing the custom gamemode set in the game //run game over function
 
-			UGameplayStatics::SetGamePaused(GetWorld(), true); //pause game
 		}
 		
 	}

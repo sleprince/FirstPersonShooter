@@ -82,6 +82,10 @@ public:
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 
+	//the function that will call gameover, this function can be called from blueprint
+	UFUNCTION(BlueprintCallable, Category = "Health")
+		void OnZeroHealth();
+
 
 };
 
