@@ -45,6 +45,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Weapon")
 	void AttachWeapon(AFirstPersonShooterCharacter* TargetCharacter);
 
+	/** Detaches the actor from a FirstPersonCharacter */
+	UFUNCTION(BlueprintCallable, Category = "Weapon")
+		void DetachWeapon(AFirstPersonShooterCharacter* TargetCharacter);
+
 	/** Make the weapon Fire a Projectile */
 	UFUNCTION(BlueprintCallable, Category="Weapon")
 	void Fire();

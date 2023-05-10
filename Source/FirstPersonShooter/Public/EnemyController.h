@@ -34,9 +34,10 @@ public:
 
 	FVector Direction;
 
-	float playerHealth = 100.0f;
-	float damage = 10.0f;
-	float minHealth = 10.0f;
+	//depricated
+	//float playerHealth = 100.0f;
+	//float damage = 10.0f;
+	//float minHealth = 10.0f;
 	
 
 protected:

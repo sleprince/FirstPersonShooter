@@ -66,13 +66,13 @@ void AEnemyController::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 
 	if (collidedWith == UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))
 	{
+		//depricated
+		//playerHealth -= damage;
 
-		playerHealth -= damage;
+		//if (playerHealth < minHealth)
+		//{
 
-		if (playerHealth < minHealth)
-		{
-
-		}
+		//}
 		
 	}
 	else if (OtherActor->GetName().Contains("Projectile")) //only runs if the above is false and this is true

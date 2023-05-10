@@ -96,6 +96,23 @@ void UTP_WeaponComponent::AttachWeapon(AFirstPersonShooterCharacter* TargetChara
 	}
 }
 
+void UTP_WeaponComponent::DetachWeapon(AFirstPersonShooterCharacter* TargetCharacter)
+{
+	Character = TargetCharacter;
+	if (Character == nullptr)
+	{
+		return;
+	}
+
+	// Detach the weapon from the First Person Character
+	FDetachmentTransformRules DetachmentRules(EDetachmentRule::KeepRelative, true);
+	DetachFromComponent(DetachmentRules);
+
+	// switch bHasRifle so the animation blueprint can switch to another animation set
+	Character->SetHasRifle(false);
+
+}
+
 void UTP_WeaponComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	if (Character == nullptr)
