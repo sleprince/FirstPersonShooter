@@ -52,8 +52,8 @@ void UTP_WeaponComponent::Fire()
 		/*UGameplayStatics::PlaySoundAtLocation(this, FireSound, Character->GetActorLocation());*/
 	}
 	
-	// Try and play a firing animation if specified
-	if (FireAnimation != nullptr)
+	// Try and play a firing animation if specified, if player has the rifle
+	if (FireAnimation != nullptr && Character->bHasRifle)
 	{
 		// Get the animation object for the arms mesh
 		UAnimInstance* AnimInstance = Character->GetMesh1P()->GetAnimInstance();
