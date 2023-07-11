@@ -8,6 +8,9 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 
+#include "Kismet/GameplayStatics.h"
+#include "FirstPersonShooter/FirstPersonShooterGameMode.h"
+
 
 //////////////////////////////////////////////////////////////////////////
 // AFirstPersonShooterCharacter
@@ -107,4 +110,13 @@ void AFirstPersonShooterCharacter::SetHasRifle(bool bNewHasRifle)
 bool AFirstPersonShooterCharacter::GetHasRifle()
 {
 	return bHasRifle;
+}
+
+void AFirstPersonShooterCharacter::OnZeroHealth()
+{
+	//cast as an fpsGameMode, * is cast as
+	((AFirstPersonShooterGameMode*)GetWorld()->GetAuthGameMode())
+		->OnGameOver();  //grabbing the custom gamemode set in the game //run game over function
+
+	UGameplayStatics::SetGamePaused(GetWorld(), true); //pause game
 }

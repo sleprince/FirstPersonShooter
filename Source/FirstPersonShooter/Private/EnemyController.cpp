@@ -7,6 +7,7 @@
 
 //#include "MyGameModeBase.h"
 #include "FirstPersonShooter/FirstPersonShooterGameMode.h" //finally figured it out, had to put FirstPersonShooter/ in front
+#include "GameWidget.h"
 
 // Sets default values
 AEnemyController::AEnemyController()
@@ -65,19 +66,19 @@ void AEnemyController::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 
 	if (collidedWith == UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))
 	{
-		// Access the Health variable in the other actor's blueprint
-		//if (ACharacter* Other = Cast<CharacterBlueprint>(OtherActor))
-		{
-		//OtherActor->GetGameInstance()
-		}
-		//UGameplayStatics::SetGamePaused(GetWorld(), true);
+		//depricated
+		//playerHealth -= damage;
 
-		//CharacterBlueprint-
+		//if (playerHealth < minHealth)
+		//{
 
+		//}
 		
 	}
 	else if (OtherActor->GetName().Contains("Projectile")) //only runs if the above is false and this is true
 	{
+		//depricated
+		
 		//OtherActor->Destroy();
 		//this->Destroy();
 

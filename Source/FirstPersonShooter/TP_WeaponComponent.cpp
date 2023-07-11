@@ -52,8 +52,8 @@ void UTP_WeaponComponent::Fire()
 		/*UGameplayStatics::PlaySoundAtLocation(this, FireSound, Character->GetActorLocation());*/
 	}
 	
-	// Try and play a firing animation if specified
-	if (FireAnimation != nullptr)
+	// Try and play a firing animation if specified, if player has the rifle
+	if (FireAnimation != nullptr && Character->bHasRifle)
 	{
 		// Get the animation object for the arms mesh
 		UAnimInstance* AnimInstance = Character->GetMesh1P()->GetAnimInstance();
@@ -94,6 +94,23 @@ void UTP_WeaponComponent::AttachWeapon(AFirstPersonShooterCharacter* TargetChara
 			EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &UTP_WeaponComponent::Fire);
 		}
 	}
+}
+
+void UTP_WeaponComponent::DetachWeapon(AFirstPersonShooterCharacter* TargetCharacter)
+{
+	Character = TargetCharacter;
+	if (Character == nullptr)
+	{
+		return;
+	}
+
+	// Detach the weapon from the First Person Character
+	FDetachmentTransformRules DetachmentRules(EDetachmentRule::KeepRelative, true);
+	DetachFromComponent(DetachmentRules);
+
+	// switch bHasRifle so the animation blueprint can switch to another animation set
+	Character->SetHasRifle(false);
+
 }
 
 void UTP_WeaponComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
